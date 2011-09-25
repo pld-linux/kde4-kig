@@ -5,7 +5,7 @@ Summary:	K Desktop Environment - Interactive Geometry
 Summary(pl_PL.UTF8):	K Desktop Environment - Interaktywna geometria
 Name:		kig
 Version:	4.7.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.bz2
@@ -13,7 +13,7 @@ Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version
 URL:		http://www.kde.org/
 BuildRequires:	boost-python-devel
 BuildRequires:	kde4-kdelibs-devel
-Obsoletes:	kde4-kdeedu-kig < 4.7.0
+Obsoletes:	kde4-kdeedu-kig < 4.6.99
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
