@@ -2,7 +2,7 @@
 %define		orgname		kig
 
 Summary:	K Desktop Environment - Interactive Geometry
-Summary(pl_PL.UTF8):	K Desktop Environment - Interaktywna geometria
+Summary(pl.UTF-8):	K Desktop Environment - Interaktywna geometria
 Name:		kde4-kig
 Version:	4.9.1
 Release:	2
