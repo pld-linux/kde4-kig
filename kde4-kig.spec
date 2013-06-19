@@ -4,12 +4,12 @@
 Summary:	K Desktop Environment - Interactive Geometry
 Summary(pl.UTF-8):	K Desktop Environment - Interaktywna geometria
 Name:		kde4-kig
-Version:	4.10.0
+Version:	4.10.4
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	ftp://ftp.kde.org/pub/kde/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
-# Source0-md5:	4a5b53dbc11225f0e0c13a6a627a764e
+# Source0-md5:	8246b26adff4b861cbafbeb0005a5fe5
 URL:		http://www.kde.org/
 BuildRequires:	automoc4
 BuildRequires:	boost-python-devel
