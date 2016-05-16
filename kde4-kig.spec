@@ -5,7 +5,7 @@ Summary:	K Desktop Environment - Interactive Geometry
 Summary(pl.UTF-8):	K Desktop Environment - Interaktywna geometria
 Name:		kde4-kig
 Version:	4.14.3
-Release:	4
+Release:	5
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://download.kde.org/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
