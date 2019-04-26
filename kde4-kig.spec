@@ -5,16 +5,18 @@ Summary:	K Desktop Environment - Interactive Geometry
 Summary(pl.UTF-8):	K Desktop Environment - Interaktywna geometria
 Name:		kde4-kig
 Version:	4.14.3
-Release:	6
-License:	GPL
+Release:	7
+License:	GPL v2+
 Group:		X11/Applications/Science
 Source0:	http://download.kde.org/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
 # Source0-md5:	2bc36c90f19b9fbebd7b3c7ac563acb3
 URL:		http://www.kde.org/
 BuildRequires:	automoc4
 BuildRequires:	boost-python-devel
-BuildRequires:	kde4-kdelibs-devel
-BuildRequires:	qt4-build
+BuildRequires:	kde4-kdelibs-devel >= 4
+BuildRequires:	python-devel >= 2
+BuildRequires:	qt4-build >= 4
+BuildRequires:	sed >= 4.0
 Obsoletes:	kde4-kdeedu-kig < 4.6.99
 Obsoletes:	kig <= 4.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,17 +39,20 @@ Kig to aplikacja do interaktywnej geometrii. Ma służyć dwóm celom:
 %prep
 %setup -q -n %{orgname}-%{version}
 
+%{__sed} -i -e '1s,/usr/bin/env python,%{__python},' pykig/pykig.py
+
 %build
 install -d build
 cd build
-%cmake \
-	..
+%cmake .. \
+	-DBoostPython_INCLUDE_DIRS=%{py_incdir} \
+	-DBoostPython_LIBRARIES="boost_python%(echo %{py_ver} | tr -d .);python%{py_ver}"
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C build/ install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
 
@@ -58,13 +63,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{orgname}.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/kig
 %attr(755,root,root) %{_bindir}/pykig.py
 %attr(755,root,root) %{_libdir}/kde4/kigpart.so
-%attr(755,root,root) %{_bindir}/kig
-%{_desktopdir}/kde4/kig.desktop
-%{_datadir}/kde4/services/kig_part.desktop
 %{_datadir}/appdata/kig.appdata.xml
 %{_datadir}/apps/kig
+%{_datadir}/kde4/services/kig_part.desktop
+%{_desktopdir}/kde4/kig.desktop
 %{_iconsdir}/hicolor/*x*/apps/kig.png
 %{_iconsdir}/hicolor/scalable/apps/kig.svgz
 %{_iconsdir}/hicolor/*x*/mimetypes/application-x-kig.png
