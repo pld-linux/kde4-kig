@@ -47,7 +47,7 @@ cd build
 %cmake .. \
 	-DBoostPython_INCLUDE_DIRS=%{py_incdir} \
 	-DBoostPython_LIBRARIES="boost_python%(echo %{py_ver} | tr -d .);python%{py_ver}"
-%{__make}
+/usr/bin/timeout -k 5 120 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
