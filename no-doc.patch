@@ -1,0 +1,10 @@
+--- kig-4.14.3/CMakeLists.txt~	2014-10-25 04:44:23.000000000 +0200
++++ kig-4.14.3/CMakeLists.txt	2022-01-23 17:14:14.423794752 +0100
+@@ -35,7 +35,6 @@
+ 
+ include(KigConfigureChecks.cmake)
+ 
+-add_subdirectory( doc )
+ add_subdirectory( icons )
+ add_subdirectory( kig )
+ add_subdirectory( mimetypes )

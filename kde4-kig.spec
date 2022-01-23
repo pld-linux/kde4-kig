@@ -1,15 +1,21 @@
+%bcond_without	doc		# build handbooks
+
 %define		_state		stable
 %define		orgname		kig
 
+%ifarch %{ix86}
+%undefine	with_doc
+%endif
 Summary:	K Desktop Environment - Interactive Geometry
 Summary(pl.UTF-8):	K Desktop Environment - Interaktywna geometria
 Name:		kde4-kig
 Version:	4.14.3
-Release:	11
+Release:	12
 License:	GPL v2+
 Group:		X11/Applications/Science
 Source0:	http://download.kde.org/%{_state}/%{version}/src/%{orgname}-%{version}.tar.xz
 # Source0-md5:	2bc36c90f19b9fbebd7b3c7ac563acb3
+Patch0:		no-doc.patch
 URL:		http://www.kde.org/
 BuildRequires:	automoc4
 BuildRequires:	boost-python-devel
@@ -38,6 +44,7 @@ Kig to aplikacja do interaktywnej geometrii. Ma służyć dwóm celom:
 
 %prep
 %setup -q -n %{orgname}-%{version}
+%{!?with_doc:%patch0 -p1}
 
 %{__sed} -i -e '1s,/usr/bin/env python,%{__python},' pykig/pykig.py
 
@@ -56,12 +63,14 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
 
+%if %{with doc}
 %find_lang %{orgname} --with-kde
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{orgname}.lang
+%files %{?with_doc:-f %{orgname}.lang}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/kig
 %attr(755,root,root) %{_bindir}/pykig.py
@@ -74,7 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/scalable/apps/kig.svgz
 %{_iconsdir}/hicolor/*x*/mimetypes/application-x-kig.png
 %{_iconsdir}/hicolor/scalable/mimetypes/application-x-kig.svgz
-%{_mandir}/man1/kig.1*
+%{?with_doc:%{_mandir}/man1/kig.1*}
 
 # subpackage?
 %{_datadir}/apps/katepart/syntax/python-kig.xml
